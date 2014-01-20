@@ -7,15 +7,6 @@
     android:background="@drawable/background_login">
     <!-- padding 内边距   layout_margin 外边距
   		android:layout_alignParentTop 布局的位置是否处于顶部 -->
-
-    <ImageView
-        android:id="@+id/recSys_logo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginStart="25dp"
-        android:src="@drawable/logo" />
   		
   	<RelativeLayout 
   	    android:id="@+id/login_div"
@@ -27,7 +18,7 @@
   		<!-- 账号 -->
   		
 	  	<TextView 
-	  		android:id="@+id/login_user"
+	  		android:id="@+id/login_user_input"
 	  		android:layout_width="wrap_content"
 	  		android:layout_height="wrap_content"
 	  		android:layout_alignParentTop="true"
@@ -36,37 +27,37 @@
 	  		style="@style/normalText"/> 
 	  		
 	  	<EditText 
-	  		android:id="@+id/login_user_input"
+	  		android:id="@+id/username_edit"
 	  		android:layout_width="fill_parent"
 	  		android:layout_height="wrap_content"
 	  		android:hint="@string/login_username_hint"
-	  		android:layout_below="@id/login_user"
+	  		android:layout_below="@id/login_user_input"
 	  		android:singleLine="true"
 	  		android:inputType="text"/>
 	    <!-- 密码 text -->
 	    <TextView 
-	    	android:id="@+id/login_password"
+	    	android:id="@+id/login_password_input"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:layout_below="@id/login_user_input"
+	    	android:layout_below="@id/username_edit"
 	    	android:layout_marginTop="3dp"
 	    	android:text="@string/login_label_password"
 	    	style="@style/normalText"/>
 	    <EditText 
-	    	android:id="@+id/login_password_input"
+	    	android:id="@+id/password_edit"
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"
-	    	android:layout_below="@id/login_password"
+	    	android:layout_below="@id/login_password_input"
 	    	android:password="true"
 	    	android:singleLine="true"
 	    	android:inputType="textPassword" />
 	    <!-- 登录button -->
 	    <Button 
-	    	android:id="@+id/login_submit_button"
-	    	android:layout_width="144dp"
+	    	android:id="@+id/signin_button"
+	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:layout_below="@id/login_password_input"
-	    	android:layout_alignRight="@id/login_password_input"
+	    	android:layout_below="@id/password_edit"
+	    	android:layout_alignRight="@id/password_edit"
 	    	android:text="@string/login_label_signin"
 	    	android:background="@drawable/login_submit_button" />
   	</RelativeLayout>
@@ -81,7 +72,20 @@
 		     android:layout_marginLeft="15dp"
 		     android:textColor="#888"
 		     android:textColorLink="#FF0066CC" />
-		 
-		
+		<ImageView android:id="@+id/miniTwitter_logo"
+		    android:src="@drawable/cat"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentBottom="true"
+		    android:layout_marginRight="25dp"
+		    android:layout_marginLeft="10dp"
+		    android:layout_marginBottom="25dp" /> 
+		<ImageView android:src="@drawable/logo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/miniTwitter_logo"
+			android:layout_alignBottom="@id/miniTwitter_logo"
+			android:paddingBottom="8dp"/>
   	</RelativeLayout>
 </LinearLayout>
