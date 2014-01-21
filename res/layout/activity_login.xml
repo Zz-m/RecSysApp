@@ -68,7 +68,7 @@
 	    	android:layout_below="@id/login_password_input"
 	    	android:layout_alignRight="@id/login_password_input"
 	    	android:text="@string/login_label_signin"
-	    	android:background="@drawable/login_submit_button" />
+	    	android:background="@drawable/submit_button_login" />
   	</RelativeLayout>
   
   	<RelativeLayout 

@@ -59,7 +59,7 @@
 	    	android:layout_below="@id/password_edit"
 	    	android:layout_alignRight="@id/password_edit"
 	    	android:text="@string/login_label_signin"
-	    	android:background="@drawable/login_submit_button" />
+	    	android:background="@drawable/submit_button_login" />
   	</RelativeLayout>
   
   	<RelativeLayout 
