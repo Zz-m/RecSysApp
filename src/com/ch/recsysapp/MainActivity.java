@@ -2,6 +2,7 @@ package com.ch.recsysapp;
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -32,6 +33,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Intent intent = new Intent();
+		intent.setClass(MainActivity.this, LoginActivity.class);
+		startActivity(intent);
+		
 		setContentView(R.layout.activity_main);
 		InitImageView();
 		InitTextView();
