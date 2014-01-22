@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 
 	private void InitImageView() {
 		imageView= (ImageView) findViewById(R.id.cursor);
-		bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher).getWidth();// 获取图片宽度
+		bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.cursor_main).getWidth();// 获取图片宽度
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenW = dm.widthPixels;// 获取分辨率宽度

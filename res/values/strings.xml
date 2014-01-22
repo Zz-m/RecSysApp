@@ -12,6 +12,9 @@
     <string name="login_register_link"><b>没有账号？</b><a href="http://www.google.com">注册</a></string>
     
     <string name="main_tab">标签</string>
+    <string name="main_tab1">近期热门</string>
+    <string name="main_tab2">最高收视</string>
+    <string name="main_tab3">猜你喜欢</string>
     
 
 </resources>
