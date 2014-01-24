@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 		ListView lv = (ListView) view1.findViewById(R.id.activity_main_lay1_listview);
 		SimpleAdapter adapter = new SimpleAdapter(this,getData(),R.layout.activity_main_listsyle,
 				new String[]{"title","info","img"},
-				new int[]{R.id.title,R.id.info,R.id.img});
+				new int[]{R.id.activity_main_title,R.id.activity_main_info,R.id.activity_main_img});
 		lv.setAdapter(adapter);
 		
 
@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
 		list.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("title", "G3");
+		map.put("title", "G3123213");
 		map.put("info", "google 3");
 		map.put("img", R.drawable.cat);
 		list.add(map);
