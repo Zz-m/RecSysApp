@@ -5,6 +5,8 @@
     android:background="@drawable/color_white"
     android:orientation="vertical" >
 
+    <!-- 空白填充 -->
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="4dp"
@@ -15,10 +17,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
+        <!-- 空白填充 -->
+
         <ImageView
             android:layout_width="8dp"
             android:layout_height="fill_parent"
             android:src="@drawable/color_gray" />
+        <!-- 图片 -->
 
         <ImageView
             android:id="@+id/activity_main_img"
@@ -31,6 +36,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <!-- 标题 -->
+
             <TextView
                 android:id="@+id/activity_main_title"
                 android:layout_width="wrap_content"
@@ -38,22 +45,24 @@
                 android:layout_weight="1"
                 android:textColor="#000000"
                 android:textSize="22sp" />
+            <!-- 内容简述 -->
 
             <TextView
                 android:id="@+id/activity_main_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#737373"
                 android:layout_weight="1"
+                android:textColor="#737373"
                 android:textSize="13sp" />
         </LinearLayout>
+        <!-- 空白填充 -->
 
         <ImageView
             android:layout_width="8dp"
             android:layout_height="fill_parent"
             android:src="@drawable/color_gray" />
-        
     </LinearLayout>
+    <!-- 空白填充 -->
 
     <ImageView
         android:layout_width="fill_parent"

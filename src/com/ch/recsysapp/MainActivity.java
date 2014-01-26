@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -21,16 +20,18 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 主界面
+ * 
+ * @author adj
+ * 
+ */
 public class MainActivity extends Activity {
 
 	private ViewPager viewPager;// 页卡内容
@@ -45,7 +46,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		/*
+		 * 根据是否初次登陆，判断是否跳转登陆界面，待优化
+		 */
 		Intent intent = new Intent();
 		intent.setClass(MainActivity.this, LoginActivity.class);
 		startActivity(intent);
@@ -57,6 +60,9 @@ public class MainActivity extends Activity {
 
 	}
 
+	/**
+	 * 初始化主界面3个标签内容
+	 */
 	private void InitViewPager() {
 		viewPager = (ViewPager) findViewById(R.id.vPager);
 		views = new ArrayList<View>();
@@ -64,8 +70,9 @@ public class MainActivity extends Activity {
 		view1 = inflater.inflate(R.layout.activity_main_lay1, null);
 		view2 = inflater.inflate(R.layout.activity_main_lay2, null);
 		view3 = inflater.inflate(R.layout.activity_main_lay3, null);
-		/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */
-
+		/*
+		 * 初始化标签1
+		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
 		SimpleAdapter adapter1 = new SimpleAdapter(this, getData(),
@@ -73,12 +80,9 @@ public class MainActivity extends Activity {
 						"info", "img" }, new int[] { R.id.activity_main_title,
 						R.id.activity_main_info, R.id.activity_main_img });
 		lv1.setAdapter(adapter1);
-		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
-
 		/*
-		 * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv2014-1-26vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+		 * 初始化标签2
 		 */
-
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
 		SimpleAdapter adapter2 = new SimpleAdapter(this, getData2(),
@@ -95,7 +99,7 @@ public class MainActivity extends Activity {
 						R.id.activity_main_lay2_info3,
 						R.id.activity_main_lay2_img3 });
 		lv2.setAdapter(adapter2);
-		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+
 		views.add(view1);
 		views.add(view2);
 		views.add(view3);
@@ -105,67 +109,65 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter
+	 * 获取数据，提供给simpleadapter 之后根据需求和getData2（）合并
 	 * 
 	 * @return
 	 */
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < 7; i++) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title", "兰戈 Rango (2011)");
-		map.put("info", "  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
-		map.put("img", R.drawable.cat);
-		list.add(map);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("title", "兰戈 Rango (2011)");
+			map.put("info",
+					"  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
+			map.put("img", R.drawable.cat);
+			list.add(map);
 
-		map = new HashMap<String, Object>();
-		map.put("title", "机器人总动员 Wall·E (2008)");
-		map.put("info", "  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
-		map.put("img", R.drawable.cat2);
-		list.add(map);
+			map = new HashMap<String, Object>();
+			map.put("title", "机器人总动员 Wall·E (2008)");
+			map.put("info",
+					"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
+			map.put("img", R.drawable.cat2);
+			list.add(map);
 
-		map = new HashMap<String, Object>();
-		map.put("title", "父与女 Father And Daughter (2001)");
-		map.put("info",
-				"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
-		map.put("img", R.drawable.cat3);
-		list.add(map);
-		
-			
+			map = new HashMap<String, Object>();
+			map.put("title", "父与女 Father And Daughter (2001)");
+			map.put("info",
+					"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
+			map.put("img", R.drawable.cat3);
+			list.add(map);
 		}
-
 		return list;
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter2
+	 * 获取数据，提供给simpleadapter2 之后根据需求和getData（）合并
 	 * 
 	 * @return
 	 */
 	private List<Map<String, Object>> getData2() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < 10; i++) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title1", "兰戈 Rango (2011)");
-		map.put("info1", "  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
-		map.put("img1", R.drawable.cat);
-		map.put("title2", "机器人总动员 Wall·E (2008)");
-		map.put("info2",
-				"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
-		map.put("img2", R.drawable.cat2);
-		map.put("title3", "父与女 Father And Daughter (2001)");
-		map.put("info3", "  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
-		map.put("img3", R.drawable.cat3);
-		list.add(map);
-		
-			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("title1", "兰戈 Rango (2011)");
+			map.put("info1",
+					"  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
+			map.put("img1", R.drawable.cat);
+			map.put("title2", "机器人总动员 Wall·E (2008)");
+			map.put("info2",
+					"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
+			map.put("img2", R.drawable.cat2);
+			map.put("title3", "父与女 Father And Daughter (2001)");
+			map.put("info3",
+					"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
+			map.put("img3", R.drawable.cat3);
+			list.add(map);
 		}
-
 		return list;
 	}
 
 	/**
-	 * 初始化头标
+	 * 初始化主界面3个tab头标的显示文字，设定OnClickListener
 	 */
 
 	private void InitTextView() {
@@ -179,7 +181,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 2 * 初始化动画，这个就是页卡滑动时，下面的横线也滑动的效果，在这里需要计算一些数据 3
+	 * 初始化动画，这个就是页卡滑动时，下面的横线也滑动的效果，在这里需要计算一些数据 3
 	 */
 
 	private void InitImageView() {
@@ -195,11 +197,9 @@ public class MainActivity extends Activity {
 		imageView.setImageMatrix(matrix);// 设置动画初始位置
 	}
 
-	// <img src="http://img.my.csdn.net/uploads/201211/10/1352554452_1685.jpg"
-	// alt="">
 	/**
 	 * 
-	 * 头标点击监听 3
+	 * 头标点击监听
 	 */
 	private class MyOnClickListener implements OnClickListener {
 		private int index = 0;
