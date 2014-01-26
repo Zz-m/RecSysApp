@@ -66,13 +66,35 @@ public class MainActivity extends Activity {
 		view3 = inflater.inflate(R.layout.activity_main_lay3, null);
 		/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv */
 
-		ListView lv = (ListView) view1.findViewById(R.id.activity_main_lay1_listview);
-		SimpleAdapter adapter = new SimpleAdapter(this,getData(),R.layout.activity_main_listsyle,
-				new String[]{"title","info","img"},
-				new int[]{R.id.activity_main_title,R.id.activity_main_info,R.id.activity_main_img});
-		lv.setAdapter(adapter);
-		
+		ListView lv1 = (ListView) view1
+				.findViewById(R.id.activity_main_lay1_listview);
+		SimpleAdapter adapter1 = new SimpleAdapter(this, getData(),
+				R.layout.activity_main_lay1_listsyle, new String[] { "title",
+						"info", "img" }, new int[] { R.id.activity_main_title,
+						R.id.activity_main_info, R.id.activity_main_img });
+		lv1.setAdapter(adapter1);
+		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
+		/*
+		 * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv2014-1-26vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+		 */
+
+		ListView lv2 = (ListView) view2
+				.findViewById(R.id.activity_main_lay2_listview);
+		SimpleAdapter adapter2 = new SimpleAdapter(this, getData2(),
+				R.layout.activity_main_lay2_listsyle, new String[] { "title1",
+						"info1", "img1", "title2", "info2", "img2", "title3",
+						"info3", "img3" }, new int[] {
+						R.id.activity_main_lay2_title1,
+						R.id.activity_main_lay2_info1,
+						R.id.activity_main_lay2_img1,
+						R.id.activity_main_lay2_title2,
+						R.id.activity_main_lay2_info2,
+						R.id.activity_main_lay2_img2,
+						R.id.activity_main_lay2_title3,
+						R.id.activity_main_lay2_info3,
+						R.id.activity_main_lay2_img3 });
+		lv2.setAdapter(adapter2);
 		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 		views.add(view1);
 		views.add(view2);
@@ -84,36 +106,61 @@ public class MainActivity extends Activity {
 
 	/**
 	 * 获取数据，提供给simpleadapter
+	 * 
 	 * @return
 	 */
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
+		for (int i = 0; i < 7; i++) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title", "G1");
-		map.put("info", "google 1");
+		map.put("title", "兰戈 Rango (2011)");
+		map.put("info", "  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
 		map.put("img", R.drawable.cat);
 		list.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("title", "G2");
-		map.put("info", "google 2");
-		map.put("img", R.drawable.cat);
+		map.put("title", "机器人总动员 Wall·E (2008)");
+		map.put("info", "  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
+		map.put("img", R.drawable.cat2);
 		list.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("title", "G3123213");
-		map.put("info", "google 3");
-		map.put("img", R.drawable.cat);
+		map.put("title", "父与女 Father And Daughter (2001)");
+		map.put("info",
+				"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
+		map.put("img", R.drawable.cat3);
 		list.add(map);
-		for(int i = 0; i < 7; i++) {
-			map = new HashMap<String, Object>();
-			map.put("title", "G3");
-			map.put("info", "google 3");
-			map.put("img", R.drawable.cat);
-			list.add(map);
-		}
 		
+			
+		}
+
+		return list;
+	}
+
+	/**
+	 * 获取数据，提供给simpleadapter2
+	 * 
+	 * @return
+	 */
+	private List<Map<String, Object>> getData2() {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < 10; i++) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title1", "兰戈 Rango (2011)");
+		map.put("info1", "  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
+		map.put("img1", R.drawable.cat);
+		map.put("title2", "机器人总动员 Wall·E (2008)");
+		map.put("info2",
+				"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
+		map.put("img2", R.drawable.cat2);
+		map.put("title3", "父与女 Father And Daughter (2001)");
+		map.put("info3", "  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
+		map.put("img3", R.drawable.cat3);
+		list.add(map);
+		
+			
+		}
+
 		return list;
 	}
 
@@ -234,6 +281,6 @@ public class MainActivity extends Activity {
 					"您选择了" + viewPager.getCurrentItem() + "页卡",
 					Toast.LENGTH_SHORT).show();
 		}
-		
+
 	}
 }
