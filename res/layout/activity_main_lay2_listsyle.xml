@@ -2,134 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/color_white"
+    android:background="@drawable/color_gray"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     android:orientation="vertical" >
 
-    <!-- 待修改成lay1样式 -->
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="4dp"
-        android:src="@drawable/color_gray" />
+ 
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_main_item"
         android:orientation="horizontal" >
 
-        <!-- workspace 1 -->
+ 
+        <!-- 图片 -->
 
         <ImageView
-            android:layout_width="7dp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/color_gray" />
+            android:id="@+id/activity_main_img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
 
         <LinearLayout
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="7dp" >
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/activity_main_lay2_img1"
-                android:layout_width="96dp"
-                android:layout_height="wrap_content" />
+            <!-- 标题 -->
 
             <TextView
-                android:id="@+id/activity_main_lay2_title1"
+                android:id="@+id/activity_main_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
+            <!-- 内容简述 -->
 
             <TextView
-                android:id="@+id/activity_main_lay2_info1"
+                android:id="@+id/activity_main_info2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="#737373"
                 android:textSize="13sp" />
         </LinearLayout>
-
-        <!-- workspace 1 -->
-        <!-- workspace 2 -->
-
-        <ImageView
-            android:layout_width="8dp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/color_gray" />
-
-        <LinearLayout
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="7dp" >
-
-            <ImageView
-                android:id="@+id/activity_main_lay2_img2"
-                android:layout_width="96dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_main_lay2_title2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/activity_main_lay2_info2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#737373"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <!-- workspace 2 -->
-        <!-- workspace 3 -->
-
-        <ImageView
-            android:layout_width="8dp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/color_gray" />
-
-        <LinearLayout
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="7dp" >
-
-            <ImageView
-                android:id="@+id/activity_main_lay2_img3"
-                android:layout_width="96dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/activity_main_lay2_title3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/activity_main_lay2_info3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#737373"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="7dp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/color_gray" />
-
-        <!-- workspace 3 -->
-
+       
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="4dp"
-        android:src="@drawable/color_gray" />
+   
 
 </LinearLayout>

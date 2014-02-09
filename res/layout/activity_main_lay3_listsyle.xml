@@ -3,11 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/color_gray"
-    android:orientation="vertical"
-    android:paddingBottom="4dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingTop="4dp" >
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:orientation="vertical" >
+
+ 
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -15,12 +17,11 @@
         android:background="@drawable/background_main_item"
         android:orientation="horizontal" >
 
-       
-
+ 
         <!-- 图片 -->
 
         <ImageView
-            android:id="@+id/activity_main_img1"
+            android:id="@+id/activity_main_img3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
@@ -34,7 +35,7 @@
             <!-- 标题 -->
 
             <TextView
-                android:id="@+id/activity_main_title1"
+                android:id="@+id/activity_main_title3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,13 +44,15 @@
             <!-- 内容简述 -->
 
             <TextView
-                android:id="@+id/activity_main_info1"
+                android:id="@+id/activity_main_info3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#737373"
                 android:textSize="13sp" />
         </LinearLayout>
+       
     </LinearLayout>
+   
 
 </LinearLayout>

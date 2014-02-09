@@ -20,6 +20,8 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -49,9 +51,9 @@ public class MainActivity extends Activity {
 		/*
 		 * 根据是否初次登陆，判断是否跳转登陆界面，待优化
 		 */
-		Intent intent = new Intent();
-		intent.setClass(MainActivity.this, LoginActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent();
+//		intent.setClass(MainActivity.this, LoginActivity.class);
+//		startActivity(intent);
 
 		setContentView(R.layout.activity_main);
 		InitImageView();
@@ -77,28 +79,39 @@ public class MainActivity extends Activity {
 				.findViewById(R.id.activity_main_lay1_listview);
 		SimpleAdapter adapter1 = new SimpleAdapter(this, getData(),
 				R.layout.activity_main_lay1_listsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title,
-						R.id.activity_main_info, R.id.activity_main_img });
+						"info", "img" }, new int[] { R.id.activity_main_title1,
+						R.id.activity_main_info1, R.id.activity_main_img1 });
 		lv1.setAdapter(adapter1);
+		lv1.setOnItemClickListener(new OnItemClickListener(){
+	        public void onItemClick(AdapterView<?> adapter, View view, int position,
+	              long id) {
+	    		Intent intent = new Intent();
+	    		intent.setClass(MainActivity.this, DetailActivity.class);
+	    		startActivity(intent);
+	      //这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
+	 
+	 
+	}});
 		/*
 		 * 初始化标签2
 		 */
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
-		SimpleAdapter adapter2 = new SimpleAdapter(this, getData2(),
-				R.layout.activity_main_lay2_listsyle, new String[] { "title1",
-						"info1", "img1", "title2", "info2", "img2", "title3",
-						"info3", "img3" }, new int[] {
-						R.id.activity_main_lay2_title1,
-						R.id.activity_main_lay2_info1,
-						R.id.activity_main_lay2_img1,
-						R.id.activity_main_lay2_title2,
-						R.id.activity_main_lay2_info2,
-						R.id.activity_main_lay2_img2,
-						R.id.activity_main_lay2_title3,
-						R.id.activity_main_lay2_info3,
-						R.id.activity_main_lay2_img3 });
+		SimpleAdapter adapter2 = new SimpleAdapter(this, getData(),
+				R.layout.activity_main_lay2_listsyle, new String[] { "title",
+			"info", "img" }, new int[] { R.id.activity_main_title2,
+			R.id.activity_main_info2, R.id.activity_main_img2 });
 		lv2.setAdapter(adapter2);
+		/*
+		 * 初始化标签3
+		 */
+		ListView lv3 = (ListView) view3
+				.findViewById(R.id.activity_main_lay3_listview);
+		SimpleAdapter adapter3 = new SimpleAdapter(this, getData(),
+				R.layout.activity_main_lay3_listsyle, new String[] { "title",
+			"info", "img" }, new int[] { R.id.activity_main_title3,
+			R.id.activity_main_info3, R.id.activity_main_img3 });
+		lv3.setAdapter(adapter3);
 
 		views.add(view1);
 		views.add(view2);
@@ -109,7 +122,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter 之后根据需求和getData2（）合并
+	 * 获取数据，提供给simpleadapter 
 	 * 
 	 * @return
 	 */
@@ -135,32 +148,6 @@ public class MainActivity extends Activity {
 			map.put("info",
 					"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
 			map.put("img", R.drawable.cat3);
-			list.add(map);
-		}
-		return list;
-	}
-
-	/**
-	 * 获取数据，提供给simpleadapter2 之后根据需求和getData（）合并
-	 * 
-	 * @return
-	 */
-	private List<Map<String, Object>> getData2() {
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		for (int i = 0; i < 10; i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("title1", "兰戈 Rango (2011)");
-			map.put("info1",
-					"  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
-			map.put("img1", R.drawable.cat);
-			map.put("title2", "机器人总动员 Wall·E (2008)");
-			map.put("info2",
-					"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
-			map.put("img2", R.drawable.cat2);
-			map.put("title3", "父与女 Father And Daughter (2001)");
-			map.put("info3",
-					"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
-			map.put("img3", R.drawable.cat3);
 			list.add(map);
 		}
 		return list;
