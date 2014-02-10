@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 /**
- * 用户登录界面
+ * 推荐内容详细界面
  * 
  * @author adj
  * 

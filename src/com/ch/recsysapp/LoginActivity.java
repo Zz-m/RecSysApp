@@ -41,6 +41,9 @@ public class LoginActivity extends Activity {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
+				/*
+				 * 提交按钮点击动画，重做
+				 */
 				ObjectAnimator oa=ObjectAnimator.ofFloat(cancel, "alpha", 0f, 1f);
 				oa.setDuration(300);
 				oa.start();
