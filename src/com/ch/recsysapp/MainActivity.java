@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ch.recsysapp.http.NetWork;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -51,9 +53,9 @@ public class MainActivity extends Activity {
 		/*
 		 * 根据是否初次登陆，判断是否跳转登陆界面，待优化
 		 */
-//		Intent intent = new Intent();
-//		intent.setClass(MainActivity.this, LoginActivity.class);
-//		startActivity(intent);
+		// Intent intent = new Intent();
+		// intent.setClass(MainActivity.this, LoginActivity.class);
+		// startActivity(intent);
 
 		setContentView(R.layout.activity_main);
 		InitImageView();
@@ -82,16 +84,16 @@ public class MainActivity extends Activity {
 						"info", "img" }, new int[] { R.id.activity_main_title1,
 						R.id.activity_main_info1, R.id.activity_main_img1 });
 		lv1.setAdapter(adapter1);
-		lv1.setOnItemClickListener(new OnItemClickListener(){
-	        public void onItemClick(AdapterView<?> adapter, View view, int position,
-	              long id) {
-	    		Intent intent = new Intent();
-	    		intent.setClass(MainActivity.this, DetailActivity.class);
-	    		startActivity(intent);
-	      //这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
-	 
-	 
-	}});
+		lv1.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				startActivity(intent);
+				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
+
+			}
+		});
 		/*
 		 * 初始化标签2
 		 */
@@ -99,8 +101,8 @@ public class MainActivity extends Activity {
 				.findViewById(R.id.activity_main_lay2_listview);
 		SimpleAdapter adapter2 = new SimpleAdapter(this, getData(),
 				R.layout.activity_main_lay2_listsyle, new String[] { "title",
-			"info", "img" }, new int[] { R.id.activity_main_title2,
-			R.id.activity_main_info2, R.id.activity_main_img2 });
+						"info", "img" }, new int[] { R.id.activity_main_title2,
+						R.id.activity_main_info2, R.id.activity_main_img2 });
 		lv2.setAdapter(adapter2);
 		/*
 		 * 初始化标签3
@@ -109,8 +111,8 @@ public class MainActivity extends Activity {
 				.findViewById(R.id.activity_main_lay3_listview);
 		SimpleAdapter adapter3 = new SimpleAdapter(this, getData(),
 				R.layout.activity_main_lay3_listsyle, new String[] { "title",
-			"info", "img" }, new int[] { R.id.activity_main_title3,
-			R.id.activity_main_info3, R.id.activity_main_img3 });
+						"info", "img" }, new int[] { R.id.activity_main_title3,
+						R.id.activity_main_info3, R.id.activity_main_img3 });
 		lv3.setAdapter(adapter3);
 
 		views.add(view1);
@@ -122,14 +124,22 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter 
+	 * 获取数据，提供给simpleadapter
 	 * 
 	 * @return
 	 */
 	private List<Map<String, Object>> getData() {
+		com.ch.recsysapp.http.Item item = NetWork
+				.getItem("http://192.168.1.105:8080/RecSysServer/servlet/GetList");
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = new HashMap<String, Object>();
+		map.put("title", item.getName());
+		map.put("info", item.getSummary());
+		map.put("img", R.drawable.cat);
+		list.add(map);
 		for (int i = 0; i < 7; i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
+			map = new HashMap<String, Object>();
 			map.put("title", "兰戈 Rango (2011)");
 			map.put("info",
 					"  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
