@@ -1,14 +1,15 @@
 package com.ch.recsysapp.http;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Map;
 
 import org.json.JSONException;
 
 import com.ch.recsysapp.util.JsonHelper;
 
-public class Item {
+public class Item implements Serializable{
 
+	private String id;
 	private String name;
 	private String summary;
 	private String imageUri;
@@ -25,6 +26,7 @@ public class Item {
 			setName((String)result.get("name"));
 			setSummary((String)result.get("summary"));
 			setImageUri((String)result.get("imageUri"));
+			setId((String)result.get("id"));
 		} catch (JSONException e) {
 			setName("json×Ö·û´®¸ñÊ½´íÎó£¬com.ch.recsysapp.http.Item");
     		setSummary("°¢Ë¹¶Ù¼Ù°¡");
@@ -41,6 +43,13 @@ public class Item {
 		this.imageUri = imageUri;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
