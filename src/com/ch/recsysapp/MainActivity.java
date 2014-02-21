@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 
 	private static String path = "http://192.168.1.105:8080/RecSysServer/servlet/GetList";// 服务器servlet uri
 	private static final int TXT_IS_FINISH = 1;// 文本传输完成
-	private static final int IMG_IS_FINISH = 2;// 图片传输完成
+	private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
 	private String response;// 服务器返回json数据
 	private Map<String, Bitmap> imgMap = new HashMap<String, Bitmap>();// 图片map
 	/*
@@ -208,8 +208,8 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter
-	 * 
+	 * 获取数据，提供给simpleadapter1
+	 * 目前测试中
 	 * @return
 	 */
 	private List<Map<String, Object>> getDataTest() {
