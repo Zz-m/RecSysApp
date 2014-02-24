@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.json.JSONException;
 
+import android.graphics.Bitmap;
+
 import com.ch.recsysapp.util.JsonHelper;
 
 public class Item implements Serializable{
@@ -13,6 +15,9 @@ public class Item implements Serializable{
 	private String name;
 	private String summary;
 	private String imageUri;
+	private Bitmap bitmap;
+
+	
 
 	public Item() {
 		setName("ÍøÂç´íÎó");
@@ -72,6 +77,13 @@ public class Item implements Serializable{
 
 	public void setImageUri(String imageUri) {
 		this.imageUri = imageUri;
+	}
+	public Bitmap getBitmap() {
+		return bitmap;
+	}
+
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
 	}
 
 }

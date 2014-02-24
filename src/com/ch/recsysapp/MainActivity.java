@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
 		SimpleAdapter adapter1 = new SimpleAdapter(this, getDataTest(),
-				R.layout.activity_main_lay1_listsyle, new String[] { "title",
+				R.layout.activity_main_lay1_itemsyle, new String[] { "title",
 						"info", "img" }, new int[] { R.id.activity_main_title1,
 						R.id.activity_main_info1, R.id.activity_main_img1 });
 		lv1.setAdapter(adapter1);
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
 		SimpleAdapter adapter2 = new SimpleAdapter(this, getData(),
-				R.layout.activity_main_lay2_listsyle, new String[] { "title",
+				R.layout.activity_main_lay2_itemsyle, new String[] { "title",
 						"info", "img" }, new int[] { R.id.activity_main_title2,
 						R.id.activity_main_info2, R.id.activity_main_img2 });
 		lv2.setAdapter(adapter2);
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
 		ListView lv3 = (ListView) view3
 				.findViewById(R.id.activity_main_lay3_listview);
 		SimpleAdapter adapter3 = new SimpleAdapter(this, getData(),
-				R.layout.activity_main_lay3_listsyle, new String[] { "title",
+				R.layout.activity_main_lay3_itemsyle, new String[] { "title",
 						"info", "img" }, new int[] { R.id.activity_main_title3,
 						R.id.activity_main_info3, R.id.activity_main_img3 });
 		lv3.setAdapter(adapter3);
