@@ -11,9 +11,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import com.ch.recsysapp.http.Item;
+import com.ch.recsysapp.module.Item;
+import com.ch.recsysapp.module.ItemList;
 import com.ch.recsysapp.util.GetPostUtil;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -60,8 +62,10 @@ public class MainActivity extends Activity {
 	private static String path = "http://192.168.1.105:8080/RecSysServer/servlet/GetList";// 服务器servlet uri
 	private static final int TXT_IS_FINISH = 1;// 文本传输完成
 	private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
+	public static final int Item_IS_OK = 3;// 单个Item完成
 	private String response;// 服务器返回json数据
 	private Map<String, Bitmap> imgMap = new HashMap<String, Bitmap>();// 图片map
+	private ItemList itemList= new ItemList();//listView 显示用
 	/*
 	 * handler,通信完成后刷新界面
 	 */
@@ -71,26 +75,24 @@ public class MainActivity extends Activity {
 		public void handleMessage(Message msg) {
 
 			if (msg.what == TXT_IS_FINISH) {
-				InitViewPager();
-				//response = null;
+				if (response != null && !response.equals("")) {
+					String[] result = response.split("&-&");
+					
+					for (int i = 0; i < result.length; i++) {
+						Item item = new Item(result[i]);
+						item.startGetImage(handler);
+						}
+				}
 			}
-			if (msg.what == IMG_IS_FINISH) {
-				
-				List list = (List) msg.obj;
-				String s = (String) list.get(0);
-				byte[] data = (byte[])list.get(1);
-				Bitmap bmp = BitmapFactory
-						.decodeByteArray(data, 0, data.length);
-				System.out.println("bbbbbbbbbbbbbb"+s);
-				imgMap.put(s, bmp);
-				//if(i == imgMap.size()) {
-				
-				
-				//}
+			if (msg.what == Item_IS_OK) {
+				Item item = (Item) msg.obj;
+				itemList.add(item);
+				System.out.println("获取图片：" + itemList.get(0).getBitmap().getHeight());
+				if(itemList.size() == 3) {
+					refreshViewPager();
+				}
 			}
-
 		}
-
 	};
 
 	@Override
@@ -107,10 +109,58 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		InitImageView();
 		InitTextView();
-		InitViewPager();
+		//InitViewPager();
 
 	}
+	/*
+	 * 数据加载完成后重刷新页面
+	 */
+	
+	private void refreshViewPager() {
+		System.out.println("asddddddddddddddddddddd    refresh!!!!!");
+		viewPager = (ViewPager) findViewById(R.id.vPager);
+		views = new ArrayList<View>();
+		LayoutInflater inflater = getLayoutInflater();
+		view1 = inflater.inflate(R.layout.activity_main_lay1, null);
+		view2 = inflater.inflate(R.layout.activity_main_lay2, null);
+		view3 = inflater.inflate(R.layout.activity_main_lay3, null);
+	
+		/*
+		 * 初始化标签1
+		 */
+		ListView lv1 = (ListView) view1
+				.findViewById(R.id.activity_main_lay1_listview);
+		MyListAdapter adapter = new MyListAdapter(view1, itemList);
+		lv1.setLayoutDirection(R.layout.activity_main_lay1_itemsyle);
+		lv1.setAdapter(adapter);//错误处
+	
+		/*
+		 * 初始化标签2
+		 */
+		ListView lv2 = (ListView) view2
+				.findViewById(R.id.activity_main_lay2_listview);
+		SimpleAdapter adapter2 = new SimpleAdapter(MainActivity.this, getData(),
+				R.layout.activity_main_lay2_itemsyle, new String[] { "title",
+						"info", "img" }, new int[] { R.id.activity_main_title2,
+						R.id.activity_main_info2, R.id.activity_main_img2 });
+		lv2.setAdapter(adapter2);
+		/*
+		 * 初始化标签3
+		 */
+		ListView lv3 = (ListView) view3
+				.findViewById(R.id.activity_main_lay3_listview);
+		SimpleAdapter adapter3 = new SimpleAdapter(MainActivity.this, getData(),
+				R.layout.activity_main_lay3_itemsyle, new String[] { "title",
+						"info", "img" }, new int[] { R.id.activity_main_title3,
+						R.id.activity_main_info3, R.id.activity_main_img3 });
+		lv3.setAdapter(adapter3);
 
+		views.add(view1);
+		views.add(view2);
+		views.add(view3);
+		viewPager.setAdapter(new MyViewPagerAdapter(views));
+		viewPager.setCurrentItem(0);
+	}
 	/**
 	 * 初始化主界面3个标签内容
 	 */
@@ -223,8 +273,6 @@ public class MainActivity extends Activity {
 				item = new Item(result[i]);
 				map = new HashMap<String, Object>();
 				map.put("title", item.getName());
-				new Thread(new GetImageThread(item.getImageUri(), item.getId()))
-						.start();
 				System.out.println("getDataTest方法id："+ item.getId());
 				map.put("info", imgMap.size());
 				map.put("img", R.drawable.cat);
@@ -349,46 +397,6 @@ public class MainActivity extends Activity {
 			msg.what = TXT_IS_FINISH;
 			// 发送这个消息到消息队列中
 			handler.sendMessage(msg);
-		}
-	}
-
-	/*
-	 * list图片信息线程,太丑，待改
-	 */
-	public class GetImageThread implements Runnable {
-
-		private String imgpath;
-		private String id;
-
-		public GetImageThread(String imgpath, String id) {
-			this.imgpath = imgpath;
-			this.id = id;
-		}
-
-		@Override
-		public void run() {
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet(imgpath);
-			HttpResponse httpResponse = null;
-			try {
-				httpResponse = httpClient.execute(httpGet);
-				if (httpResponse.getStatusLine().getStatusCode() == 200) {
-					byte[] data = EntityUtils.toByteArray(httpResponse
-							.getEntity());
-					// 获取一个Message对象，设置what为1
-					Message msg = Message.obtain();
-					List list = new ArrayList();
-					list.add(id);
-					list.add(data);
-					msg.obj = list;
-					msg.what = IMG_IS_FINISH;
-					System.out.println("run方法id："+ id);
-					// 发送这个消息到消息队列中
-					handler.sendMessage(msg);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
