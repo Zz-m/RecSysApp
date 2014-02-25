@@ -88,9 +88,9 @@ public class MainActivity extends Activity {
 				Item item = (Item) msg.obj;
 				itemList.add(item);
 				System.out.println("获取图片：" + itemList.get(0).getBitmap().getHeight());
-				if(itemList.size() == 3) {
-					refreshViewPager();
-				}
+				
+				refreshViewPager();
+				
 			}
 		}
 	};
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		InitImageView();
 		InitTextView();
-		//InitViewPager();
+		InitViewPager();
 
 	}
 	/*
@@ -130,9 +130,20 @@ public class MainActivity extends Activity {
 		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
-		MyListAdapter adapter = new MyListAdapter(view1, itemList);
-		lv1.setLayoutDirection(R.layout.activity_main_lay1_itemsyle);
-		lv1.setAdapter(adapter);//错误处
+		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);
+		
+		lv1.setAdapter(adapter);
+		lv1.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				startActivity(intent);
+				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
+				
+				//InitViewPager();
+			}
+		});
 	
 		/*
 		 * 初始化标签2
@@ -160,6 +171,8 @@ public class MainActivity extends Activity {
 		views.add(view3);
 		viewPager.setAdapter(new MyViewPagerAdapter(views));
 		viewPager.setCurrentItem(0);
+		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+	
 	}
 	/**
 	 * 初始化主界面3个标签内容
@@ -176,20 +189,17 @@ public class MainActivity extends Activity {
 		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
-		SimpleAdapter adapter1 = new SimpleAdapter(this, getDataTest(),
-				R.layout.activity_main_lay1_itemsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title1,
-						R.id.activity_main_info1, R.id.activity_main_img1 });
-		lv1.setAdapter(adapter1);
+		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);		
+		lv1.setAdapter(adapter);
 		lv1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapter, View view,
 					int position, long id) {
-//				Intent intent = new Intent();
-//				intent.setClass(MainActivity.this, DetailActivity.class);
-//				startActivity(intent);
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				startActivity(intent);
 				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
 				
-				InitViewPager();
+				//InitViewPager();
 			}
 		});
 		/*
@@ -384,7 +394,7 @@ public class MainActivity extends Activity {
 	}
 
 	/*
-	 * list文字信息线程
+	 * 获取json response线程
 	 */
 	public class GetTxtThread implements Runnable {
 
