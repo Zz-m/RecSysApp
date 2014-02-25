@@ -5,17 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
 import com.ch.recsysapp.module.Item;
 import com.ch.recsysapp.module.ItemList;
 import com.ch.recsysapp.util.GetPostUtil;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -61,7 +54,7 @@ public class MainActivity extends Activity {
 
 	private static String path = "http://192.168.1.105:8080/RecSysServer/servlet/GetList";// 服务器servlet uri
 	private static final int TXT_IS_FINISH = 1;// 文本传输完成
-	private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
+	//private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
 	public static final int Item_IS_OK = 3;// 单个Item完成
 	private String response;// 服务器返回json数据
 	private Map<String, Bitmap> imgMap = new HashMap<String, Bitmap>();// 图片map
@@ -237,7 +230,6 @@ public class MainActivity extends Activity {
 	 * @return
 	 */
 	private List<Map<String, Object>> getData() {
-		Item item = new Item();
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
