@@ -22,6 +22,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -52,13 +54,14 @@ public class MainActivity extends Activity {
 	private int bmpW;// 动画图片宽度
 	private View view1, view2, view3;// 各个页卡
 
-	private static String path = "http://192.168.1.105:8080/RecSysServer/servlet/GetList";// 服务器servlet uri
+	private static String path = "http://192.168.1.105:8080/RecSysServer/servlet/GetList";// 服务器servlet
+																							// uri
 	private static final int TXT_IS_FINISH = 1;// 文本传输完成
-	//private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
+	// private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
 	public static final int Item_IS_OK = 3;// 单个Item完成
 	private String response;// 服务器返回json数据
 	private Map<String, Bitmap> imgMap = new HashMap<String, Bitmap>();// 图片map
-	private ItemList itemList= new ItemList();//listView 显示用
+	private ItemList itemList = new ItemList();// listView 显示用
 	/*
 	 * handler,通信完成后刷新界面
 	 */
@@ -70,20 +73,20 @@ public class MainActivity extends Activity {
 			if (msg.what == TXT_IS_FINISH) {
 				if (response != null && !response.equals("")) {
 					String[] result = response.split("&-&");
-					
 					for (int i = 0; i < result.length; i++) {
 						Item item = new Item(result[i]);
 						item.startGetImage(handler);
-						}
+					}
 				}
 			}
 			if (msg.what == Item_IS_OK) {
 				Item item = (Item) msg.obj;
 				itemList.add(item);
-				System.out.println("获取图片：" + itemList.get(0).getBitmap().getHeight());
-				
+				System.out.println("获取图片："
+						+ itemList.get(0).getBitmap().getHeight());
+
 				refreshViewPager();
-				
+
 			}
 		}
 	};
@@ -105,10 +108,11 @@ public class MainActivity extends Activity {
 		InitViewPager();
 
 	}
+
 	/*
 	 * 数据加载完成后重刷新页面
 	 */
-	
+
 	private void refreshViewPager() {
 		System.out.println("asddddddddddddddddddddd    refresh!!!!!");
 		viewPager = (ViewPager) findViewById(R.id.vPager);
@@ -117,14 +121,14 @@ public class MainActivity extends Activity {
 		view1 = inflater.inflate(R.layout.activity_main_lay1, null);
 		view2 = inflater.inflate(R.layout.activity_main_lay2, null);
 		view3 = inflater.inflate(R.layout.activity_main_lay3, null);
-	
+
 		/*
-		 * 初始化标签1
+		 * 刷新标签1
 		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
 		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);
-		
+
 		lv1.setAdapter(adapter);
 		lv1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapter, View view,
@@ -133,30 +137,32 @@ public class MainActivity extends Activity {
 				intent.setClass(MainActivity.this, DetailActivity.class);
 				startActivity(intent);
 				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
-				
-				//InitViewPager();
+
+				// InitViewPager();
 			}
 		});
-	
+
 		/*
-		 * 初始化标签2
+		 * 刷新标签2
 		 */
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
-		SimpleAdapter adapter2 = new SimpleAdapter(MainActivity.this, getData(),
-				R.layout.activity_main_lay2_itemsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title2,
-						R.id.activity_main_info2, R.id.activity_main_img2 });
+		SimpleAdapter adapter2 = new SimpleAdapter(MainActivity.this,
+				getData(), R.layout.activity_main_lay2_itemsyle, new String[] {
+						"title", "info", "img" }, new int[] {
+						R.id.activity_main_title2, R.id.activity_main_info2,
+						R.id.activity_main_img2 });
 		lv2.setAdapter(adapter2);
 		/*
-		 * 初始化标签3
+		 * 刷新标签3
 		 */
 		ListView lv3 = (ListView) view3
 				.findViewById(R.id.activity_main_lay3_listview);
-		SimpleAdapter adapter3 = new SimpleAdapter(MainActivity.this, getData(),
-				R.layout.activity_main_lay3_itemsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title3,
-						R.id.activity_main_info3, R.id.activity_main_img3 });
+		SimpleAdapter adapter3 = new SimpleAdapter(MainActivity.this,
+				getData(), R.layout.activity_main_lay3_itemsyle, new String[] {
+						"title", "info", "img" }, new int[] {
+						R.id.activity_main_title3, R.id.activity_main_info3,
+						R.id.activity_main_img3 });
 		lv3.setAdapter(adapter3);
 
 		views.add(view1);
@@ -165,8 +171,9 @@ public class MainActivity extends Activity {
 		viewPager.setAdapter(new MyViewPagerAdapter(views));
 		viewPager.setCurrentItem(0);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-	
+
 	}
+
 	/**
 	 * 初始化主界面3个标签内容
 	 */
@@ -182,7 +189,7 @@ public class MainActivity extends Activity {
 		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
-		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);		
+		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);
 		lv1.setAdapter(adapter);
 		lv1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapter, View view,
@@ -191,8 +198,6 @@ public class MainActivity extends Activity {
 				intent.setClass(MainActivity.this, DetailActivity.class);
 				startActivity(intent);
 				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
-				
-				//InitViewPager();
 			}
 		});
 		/*
@@ -225,7 +230,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter
+	 * 获取数据，提供给simpleadapter 准备弃用
 	 * 
 	 * @return
 	 */
@@ -260,8 +265,8 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter1
-	 * 目前测试中
+	 * 获取数据，提供给simpleadapter1 弃用
+	 * 
 	 * @return
 	 */
 	private List<Map<String, Object>> getDataTest() {
@@ -270,16 +275,16 @@ public class MainActivity extends Activity {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (response != null && !response.equals("")) {
 			String[] result = response.split("&-&");
-			
+
 			for (int i = 0; i < result.length; i++) {
 				item = new Item(result[i]);
 				map = new HashMap<String, Object>();
 				map.put("title", item.getName());
-				System.out.println("getDataTest方法id："+ item.getId());
+				System.out.println("getDataTest方法id：" + item.getId());
 				map.put("info", imgMap.size());
 				map.put("img", R.drawable.cat);
 				list.add(map);
-				}
+			}
 
 		} else {
 
@@ -441,5 +446,30 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.main_menu_refresh: {
+			itemList = new ItemList();
+			// 获取一个Message对象，设置what为1
+			Message msg = Message.obtain();
+			msg.obj = response;
+			msg.what = TXT_IS_FINISH;
+			// 发送这个消息到消息队列中
+			handler.sendMessage(msg);
+		}
+			;
+			break;
+		}
+
+		return false;
 	}
 }

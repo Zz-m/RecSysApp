@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 /**
  * 
- * @author adj 
- * listView adapter
+ * @author adj listView adapter
  * 
  */
 public class MyListAdapter extends BaseAdapter {

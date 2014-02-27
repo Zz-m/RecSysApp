@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -20,6 +21,8 @@ public class DetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
+		//TextView tv = (TextView)findViewById(R.id.detail_title);
+		//tv.setText("Ä³Å¼ÀëÏß°¢Ë¹¶Ù");
 		Button play;
 		play = (Button) findViewById(R.id.detail_play_button);
 		play.setOnClickListener(new OnClickListener() {
