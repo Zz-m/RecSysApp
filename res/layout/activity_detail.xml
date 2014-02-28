@@ -19,13 +19,14 @@
             android:background="@drawable/color_white"
             android:orientation="horizontal" >
 
+            <!-- 海报 -->
+
             <ImageView
                 android:id="@+id/detail_poster"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="16"
-                android:src="@drawable/cat" />
+                android:src="@drawable/image_blank" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -35,13 +36,16 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
+                <!-- title -->
+
                 <TextView
                     android:id="@+id/detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="兰戈 Rango (2011)"
                     android:textColor="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
+                <!-- 导演 -->
 
                 <TextView
                     android:id="@+id/detail_director"
@@ -49,7 +53,8 @@
                     android:layout_height="wrap_content"
                     android:text="导演	戈尔·维宾斯基"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 主演 -->
 
                 <TextView
                     android:id="@+id/detail_starring"
@@ -57,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:text="主演	约翰尼·德普 / 艾拉·菲舍尔 "
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 类型 -->
 
                 <TextView
                     android:id="@+id/detail_type"
@@ -65,7 +71,8 @@
                     android:layout_height="wrap_content"
                     android:text="类型	喜剧 / 动作 /"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 地区 -->
 
                 <TextView
                     android:id="@+id/detail_area"
@@ -73,7 +80,8 @@
                     android:layout_height="wrap_content"
                     android:text="地区	美国"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 上映时间 -->
 
                 <TextView
                     android:id="@+id/detail_release"
@@ -81,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:text="上映时间	2011-03-04(美国)"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 片长 -->
 
                 <TextView
                     android:id="@+id/detail_runningtime"
@@ -89,7 +98,8 @@
                     android:layout_height="wrap_content"
                     android:text="片长	107分钟 / 112分钟(加长版)"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 别名 -->
 
                 <TextView
                     android:id="@+id/detail_aliases"
@@ -97,7 +107,8 @@
                     android:layout_height="wrap_content"
                     android:text="别名	飙风雷哥(台) / 马拉高(港) "
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+                <!-- 评分 -->
 
                 <TextView
                     android:id="@+id/detail_score"
@@ -105,9 +116,10 @@
                     android:layout_height="wrap_content"
                     android:text="评分	 豆瓣： 7.7 IMDB： 7.3"
                     android:textColor="#000000"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
+        <!-- 播放按钮 -->
 
         <Button
             android:id="@+id/detail_play_button"
@@ -123,6 +135,7 @@
             android:text="简介："
             android:textColor="#000000"
             android:textSize="22sp" />
+        <!-- 内容介绍 -->
 
         <TextView
             android:id="@+id/detail_content"
@@ -131,7 +144,7 @@
             android:text="　　兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他倍感无聊，这个酷爱幻想和表演的家伙只得在头脑中编出属于自己的英雄剧。可就在某天，一个意外将他驱赶出惯常的方寸空间，兰戈莫名其妙来到了西部荒原的公路上。在沙漠中穿行的时候，兰戈遭到猎鹰的袭击。经过一番周折，他来到了名为黄沙（Dirt）的小镇，这里住着许多昆虫和动物，破败不堪，宛若死城。兰戈意外干掉了凶恶的猎鹰，由此被镇上的居民视为英雄，他也乐于享受这种荣誉，可是英雄毕竟不好当…… 
 　　\n　　本片荣获2012年奥斯卡金像奖最佳动画长片奖；2012年安尼奖最佳动画片、最佳角色设计、最佳编辑和最佳剧本奖；2011年青年选择奖最佳配音奖（约翰尼·德普）。"
             android:textColor="#000000"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

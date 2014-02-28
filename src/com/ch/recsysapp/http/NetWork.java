@@ -1,11 +1,7 @@
 package com.ch.recsysapp.http;
 
-import org.json.JSONException;
-
 import com.ch.recsysapp.module.Item;
 import com.ch.recsysapp.util.GetPostUtil;
-import com.ch.recsysapp.util.HttpConnection;
-import com.ch.recsysapp.util.JsonHelper;
 
 public class NetWork {
 	public static Item getItem(String strURL)  {

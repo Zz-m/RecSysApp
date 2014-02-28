@@ -36,7 +36,7 @@ public class HttpConnection {
 
 	public static String handleGet(String strUrl) {
 		String result = null;
-		StringBuffer buffer = null;
+		//StringBuffer buffer = null;
 		HttpGet request = new HttpGet(strUrl);//实例化一个HttpGet请求(指定URL)
 		DefaultHttpClient client = new DefaultHttpClient();//实例化一个客户端
 		try {

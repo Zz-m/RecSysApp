@@ -1,14 +1,10 @@
 package com.ch.recsysapp.module;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
@@ -26,7 +22,7 @@ import com.ch.recsysapp.util.JsonHelper;
  * @author adj
  * 
  */
-public class Item implements Serializable {
+public class Item {
 
 	private String id;
 	private String name;
@@ -46,6 +42,7 @@ public class Item implements Serializable {
 	/*
 	 * json字符串构造
 	 */
+	@SuppressWarnings("rawtypes")
 	public Item(String Json) {
 		try {
 			Map result = JsonHelper.toMap(Json);
@@ -54,7 +51,7 @@ public class Item implements Serializable {
 			setImageUri((String) result.get("imageUri"));
 			setId((String) result.get("id"));
 		} catch (JSONException e) {
-			setName("json字符串格式错误，com.ch.recsysapp.http.Item");//测试完修改
+			setName("json字符串格式错误，com.ch.recsysapp.http.Item");// 测试完修改
 			setSummary("阿斯顿假啊");
 			setImageUri("12312321");
 			e.printStackTrace();
@@ -121,7 +118,7 @@ public class Item implements Serializable {
 	}
 
 	/*
-	 * 读取图片线程类
+	 * 读取图片线程类 有空了线程池优化
 	 */
 	public class GetImageThread implements Runnable {
 		private Handler handler;
@@ -147,12 +144,17 @@ public class Item implements Serializable {
 					// 获取一个Message对象，设置what为Item_IS_OK
 					Message msg = Message.obtain();
 					msg.obj = Item.this;
-					msg.what = MainActivity.Item_IS_OK;
+					msg.what = MainActivity.ITEM_IS_OK;
 					System.out.println("run方法id：" + id);
 					// 发送这个消息到消息队列中
 					handler.sendMessage(msg);
 				}
-			} catch (Exception e) {
+			} catch (Exception e) {// 图像获取失败依然传不完整item，mainactivity刷新的时候重新获取图片
+				Message msg = Message.obtain();
+				msg.obj = Item.this;
+				msg.what = MainActivity.ITEM_IS_OK;
+				System.out.println("run方法id：" + id);
+				handler.sendMessage(msg);
 				System.out.println("com.ch.recsysapp.module.item");
 				e.printStackTrace();
 			}

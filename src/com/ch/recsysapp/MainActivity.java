@@ -9,9 +9,9 @@ import com.ch.recsysapp.module.Item;
 import com.ch.recsysapp.module.ItemList;
 import com.ch.recsysapp.util.GetPostUtil;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -58,38 +58,14 @@ public class MainActivity extends Activity {
 																							// uri
 	private static final int TXT_IS_FINISH = 1;// 文本传输完成
 	// private static final int IMG_IS_FINISH = 2;// 单张图片传输完成
-	public static final int Item_IS_OK = 3;// 单个Item完成
+	public static final int ITEM_IS_OK = 3;// 单个Item完成
+	public static final int LISTVIEW_REFRESH = 4;// 点击刷新按钮
 	private String response;// 服务器返回json数据
-	private Map<String, Bitmap> imgMap = new HashMap<String, Bitmap>();// 图片map
 	private ItemList itemList = new ItemList();// listView 显示用
+
 	/*
 	 * handler,通信完成后刷新界面
 	 */
-	private Handler handler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-
-			if (msg.what == TXT_IS_FINISH) {
-				if (response != null && !response.equals("")) {
-					String[] result = response.split("&-&");
-					for (int i = 0; i < result.length; i++) {
-						Item item = new Item(result[i]);
-						item.startGetImage(handler);
-					}
-				}
-			}
-			if (msg.what == Item_IS_OK) {
-				Item item = (Item) msg.obj;
-				itemList.add(item);
-				System.out.println("获取图片："
-						+ itemList.get(0).getBitmap().getHeight());
-
-				refreshViewPager();
-
-			}
-		}
-	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +85,34 @@ public class MainActivity extends Activity {
 
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.main_menu_refresh: {
+			// 获取一个Message对象，设置what为1
+			Message msg = Message.obtain();
+			msg.what = LISTVIEW_REFRESH;
+			// 发送这个消息到消息队列中
+			handler.sendMessage(msg);
+		}
+			;
+			break;
+		}
+
+		return false;
+	}
+
 	/*
 	 * 数据加载完成后重刷新页面
 	 */
 
 	private void refreshViewPager() {
-		System.out.println("asddddddddddddddddddddd    refresh!!!!!");
 		viewPager = (ViewPager) findViewById(R.id.vPager);
 		views = new ArrayList<View>();
 		LayoutInflater inflater = getLayoutInflater();
@@ -128,17 +126,25 @@ public class MainActivity extends Activity {
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
 		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);
-
 		lv1.setAdapter(adapter);
 		lv1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapter, View view,
 					int position, long id) {
+				Item it = itemList.get(position);
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, DetailActivity.class);
+				/* new一个Bundle对象，并将要传递的数据传入 */
+				Bundle bundle = new Bundle();
+				bundle.putString("id", it.getId());
+				bundle.putString("name", it.getName());
+				bundle.putString("summary", it.getSummary());
+				bundle.putString("imageUri", it.getImageUri());
+				// bundle.putParcelable("image", it.getBitmap());
+				/* 将Bundle对象assign给Intent */
+				intent.putExtras(bundle);
 				startActivity(intent);
 				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
 
-				// InitViewPager();
 			}
 		});
 
@@ -147,23 +153,45 @@ public class MainActivity extends Activity {
 		 */
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
-		SimpleAdapter adapter2 = new SimpleAdapter(MainActivity.this,
-				getData(), R.layout.activity_main_lay2_itemsyle, new String[] {
-						"title", "info", "img" }, new int[] {
-						R.id.activity_main_title2, R.id.activity_main_info2,
-						R.id.activity_main_img2 });
+		MyListAdapter adapter2 = new MyListAdapter(MainActivity.this, itemList);
 		lv2.setAdapter(adapter2);
+		lv2.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				Item it = itemList.get(position);
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("id", it.getId());
+				bundle.putString("name", it.getName());
+				bundle.putString("summary", it.getSummary());
+				bundle.putString("imageUri", it.getImageUri());
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
 		/*
 		 * 刷新标签3
 		 */
 		ListView lv3 = (ListView) view3
 				.findViewById(R.id.activity_main_lay3_listview);
-		SimpleAdapter adapter3 = new SimpleAdapter(MainActivity.this,
-				getData(), R.layout.activity_main_lay3_itemsyle, new String[] {
-						"title", "info", "img" }, new int[] {
-						R.id.activity_main_title3, R.id.activity_main_info3,
-						R.id.activity_main_img3 });
+		MyListAdapter adapter3 = new MyListAdapter(MainActivity.this, itemList);
 		lv3.setAdapter(adapter3);
+		lv3.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapter, View view,
+					int position, long id) {
+				Item it = itemList.get(position);
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("id", it.getId());
+				bundle.putString("name", it.getName());
+				bundle.putString("summary", it.getSummary());
+				bundle.putString("imageUri", it.getImageUri());
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
 
 		views.add(view1);
 		views.add(view2);
@@ -189,17 +217,11 @@ public class MainActivity extends Activity {
 		 */
 		ListView lv1 = (ListView) view1
 				.findViewById(R.id.activity_main_lay1_listview);
-		MyListAdapter adapter = new MyListAdapter(MainActivity.this, itemList);
+		SimpleAdapter adapter = new SimpleAdapter(this, getData(),
+				R.layout.activity_main_lay1_itemsyle, new String[] { "title",
+						"info", "img" }, new int[] { R.id.activity_main_title1,
+						R.id.activity_main_info1, R.id.activity_main_img1 });
 		lv1.setAdapter(adapter);
-		lv1.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> adapter, View view,
-					int position, long id) {
-				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, DetailActivity.class);
-				startActivity(intent);
-				// 这个里面用到最多的就是position 这个就是你选择的是哪个行。在这里面你就可以做表格点击事件进行操作了。
-			}
-		});
 		/*
 		 * 初始化标签2
 		 */
@@ -230,7 +252,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * 获取数据，提供给simpleadapter 准备弃用
+	 * 获取数据，提供给simpleadapter 之后修改，读取保存数据，获取网络数据前初始化界面
 	 * 
 	 * @return
 	 */
@@ -239,55 +261,6 @@ public class MainActivity extends Activity {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		for (int i = 0; i < 7; i++) {
-			map = new HashMap<String, Object>();
-			map.put("title", "兰戈 Rango (2011)");
-			map.put("info",
-					"  兰戈（约翰尼·德普 Johnny Depp 配音）是一只干瘦、翠绿的蜥蜴，他住在鱼缸里，蓝天白云椰子树的假相让他");
-			map.put("img", R.drawable.cat);
-			list.add(map);
-
-			map = new HashMap<String, Object>();
-			map.put("title", "机器人总动员 Wall·E (2008)");
-			map.put("info",
-					"  公元2700年，人类文明高度发展，却因污染和生活垃圾大量增加使得地球不再适于人类居住。地球人被迫乘坐飞船离开故乡，进行一次漫长无边的宇宙之旅。");
-			map.put("img", R.drawable.cat2);
-			list.add(map);
-
-			map = new HashMap<String, Object>();
-			map.put("title", "父与女 Father And Daughter (2001)");
-			map.put("info",
-					"  秋日温暖的傍晚，父亲带着女儿一起骑单车，他们穿过林间小路，骑过草地，骑上高坡，来到平静的湖边。 父亲抱抱女儿，登上了小船。女儿");
-			map.put("img", R.drawable.cat3);
-			list.add(map);
-
-		}
-		return list;
-	}
-
-	/**
-	 * 获取数据，提供给simpleadapter1 弃用
-	 * 
-	 * @return
-	 */
-	private List<Map<String, Object>> getDataTest() {
-		Item item = new Item();
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (response != null && !response.equals("")) {
-			String[] result = response.split("&-&");
-
-			for (int i = 0; i < result.length; i++) {
-				item = new Item(result[i]);
-				map = new HashMap<String, Object>();
-				map.put("title", item.getName());
-				System.out.println("getDataTest方法id：" + item.getId());
-				map.put("info", imgMap.size());
-				map.put("img", R.drawable.cat);
-				list.add(map);
-			}
-
-		} else {
-
 			map = new HashMap<String, Object>();
 			map.put("title", "兰戈 Rango (2011)");
 			map.put("info",
@@ -448,28 +421,35 @@ public class MainActivity extends Activity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.main_menu_refresh: {
-			itemList = new ItemList();
-			// 获取一个Message对象，设置what为1
-			Message msg = Message.obtain();
-			msg.obj = response;
-			msg.what = TXT_IS_FINISH;
-			// 发送这个消息到消息队列中
-			handler.sendMessage(msg);
-		}
-			;
-			break;
-		}
+		@Override
+		public void handleMessage(Message msg) {
 
-		return false;
-	}
+			if (msg.what == TXT_IS_FINISH) {
+				if (response != null && !response.equals("")) {
+					String[] result = response.split("&-&");
+					for (int i = 0; i < result.length; i++) {
+						Item item = new Item(result[i]);
+						item.startGetImage(handler);
+					}
+				}
+			}
+			if (msg.what == ITEM_IS_OK) {
+				Item item = (Item) msg.obj;
+				itemList.add(item);
+				refreshViewPager();
+
+			}
+			if (msg.what == LISTVIEW_REFRESH) {
+				for (int i = 0; i < itemList.size(); i++) {
+					if (itemList.get(i).getBitmap() == null) {
+						itemList.get(i).startGetImage(handler);
+					}
+				}
+				refreshViewPager();
+			}
+		}
+	};
 }

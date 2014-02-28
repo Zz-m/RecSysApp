@@ -1,5 +1,6 @@
 package com.ch.recsysapp.util;
 
+import android.annotation.SuppressLint;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -27,7 +28,9 @@ public class JsonHelper {
      *            javaBean
      * @return Map对象
      */
-    public static Map toMap(Object javaBean) {
+    @SuppressLint("DefaultLocale")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static Map toMap(Object javaBean) {
 
         Map result = new HashMap();
         Method[] methods = javaBean.getClass().getDeclaredMethods();
@@ -65,7 +68,8 @@ public class JsonHelper {
      * @return Map对象
      * @throws JSONException
      */
-    public static Map toMap(String jsonString) throws JSONException {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public static Map toMap(String jsonString) throws JSONException {
 
     	if(jsonString == null || jsonString.equals("")) {
     		Map result = new HashMap();
@@ -113,7 +117,9 @@ public class JsonHelper {
      * @param data
      *            Map数据
      */
-    public static Object toJavaBean(Object javabean, Map data) {
+    @SuppressLint("DefaultLocale")
+	@SuppressWarnings("rawtypes")
+	public static Object toJavaBean(Object javabean, Map data) {
 
         Method[] methods = javabean.getClass().getDeclaredMethods();
         for (Method method : methods) {
@@ -150,7 +156,8 @@ public class JsonHelper {
      *             json解析异常
      * @throws JSONException
      */
-    public static void toJavaBean(Object javabean, String jsonString)
+    @SuppressWarnings("rawtypes")
+	public static void toJavaBean(Object javabean, String jsonString)
             throws ParseException, JSONException {
 
         JSONObject jsonObject = new JSONObject(jsonString);
