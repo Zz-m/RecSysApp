@@ -1,5 +1,8 @@
-package com.ch.recsysapp;
+package com.ch.recsysapp.adapter;
 
+import com.ch.recsysapp.R;
+import com.ch.recsysapp.R.id;
+import com.ch.recsysapp.R.layout;
 import com.ch.recsysapp.module.ItemList;
 
 import android.content.Context;

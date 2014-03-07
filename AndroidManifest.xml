@@ -32,9 +32,9 @@
             android:name="com.ch.recsysapp.DetailActivity"
             android:label="@string/detail_title"
             android:parentActivityName="com.ch.recsysapp.MainActivity" >
-            <meta-data
+             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ch.recsysapp.MainActivity" />
+                android:value="com.ch.recsysapp.MainActivity" /> 
         </activity>
         
     </application>

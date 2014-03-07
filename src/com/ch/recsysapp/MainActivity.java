@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ch.recsysapp.adapter.MyListAdapter;
 import com.ch.recsysapp.module.Item;
 import com.ch.recsysapp.module.ItemList;
 import com.ch.recsysapp.util.GetPostUtil;
@@ -50,7 +51,7 @@ public class MainActivity extends Activity {
 	private TextView textView1, textView2, textView3;
 	private List<View> views;// Tab页面列表
 	private int offset = 0;// 动画图片偏移量
-	private int currIndex = 0;// 当前页卡编号
+	private int currIndex = 0;// 当前页卡编号  //2014.3.7 修改为静态可以在进入详细界面退回重新new mainActivity的时候返回正确页面，数据持久做了之后修改
 	private int bmpW;// 动画图片宽度
 	private View view1, view2, view3;// 各个页卡
 
@@ -197,7 +198,7 @@ public class MainActivity extends Activity {
 		views.add(view2);
 		views.add(view3);
 		viewPager.setAdapter(new MyViewPagerAdapter(views));
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(currIndex);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
 	}
@@ -247,7 +248,7 @@ public class MainActivity extends Activity {
 		views.add(view2);
 		views.add(view3);
 		viewPager.setAdapter(new MyViewPagerAdapter(views));
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(currIndex);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
 
