@@ -28,11 +28,13 @@ import android.widget.TextView;
 public class LoginActivity extends Activity {
 
 	TextView myTextView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		init();
 	}
+
 	/**
 	 * 初始化
 	 */
@@ -40,7 +42,6 @@ public class LoginActivity extends Activity {
 		String s = "没有账号？注册";
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
-
 		final Activity thisActivity = this;
 		final TextView userNameText = (TextView) this
 				.findViewById(R.id.login_user_input);
@@ -58,7 +59,8 @@ public class LoginActivity extends Activity {
 				/*
 				 * 提交按钮点击动画，重做
 				 */
-				ObjectAnimator oa=ObjectAnimator.ofFloat(cancel, "alpha", 0f, 1f);
+				ObjectAnimator oa = ObjectAnimator.ofFloat(cancel, "alpha", 0f,
+						1f);
 				oa.setDuration(300);
 				oa.start();
 				new AlertDialog.Builder(thisActivity)
@@ -73,22 +75,25 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		myTextView = (TextView) this.findViewById(R.id.register_link2); 
-		//创建一个 SpannableString对象  
-        SpannableString sp = new SpannableString(s);  
-        //设置超链接  
-        sp.setSpan(new URLSpan("http://www.google.com"), s.length()-2, s.length(),  
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  
-//        //设置高亮样式一  
-//        sp.setSpan(new BackgroundColorSpan(Color.RED), 17 ,19,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
-//        //设置高亮样式二  
-//        sp.setSpan(new ForegroundColorSpan(888),0, s.length()-3,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);    
-//        //设置斜体  
-        sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC), 0, s.length()-2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);  
-        //SpannableString对象设置给TextView  
-        myTextView.setText(sp);  
-        //设置TextView可点击  
-        myTextView.setMovementMethod(LinkMovementMethod.getInstance());  
+		myTextView = (TextView) this.findViewById(R.id.register_link2);
+		// 创建一个 SpannableString对象
+		SpannableString sp = new SpannableString(s);
+		// 设置超链接
+		sp.setSpan(new URLSpan("http://www.google.com"), s.length() - 2,
+				s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		// //设置高亮样式一
+		// sp.setSpan(new BackgroundColorSpan(Color.RED), 17
+		// ,19,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		// //设置高亮样式二
+		// sp.setSpan(new ForegroundColorSpan(888),0,
+		// s.length()-3,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		// //设置斜体
+		sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC), 0,
+				s.length() - 2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		// SpannableString对象设置给TextView
+		myTextView.setText(sp);
+		// 设置TextView可点击
+		myTextView.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 }
