@@ -1,4 +1,4 @@
-RecSysApp
+Snake
 =========
 
-Recommended System develop for fun いじょう。
+It's a nice day。 いじょう。

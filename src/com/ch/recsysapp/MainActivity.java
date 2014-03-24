@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ch.recsysapp.adapter.ListAnimationAdapter;
+import com.ch.recsysapp.adapter.ListAnimationAdapter2;
 import com.ch.recsysapp.adapter.MyListAdapter;
+import com.ch.recsysapp.adapter.SpeedScrollListener;
 import com.ch.recsysapp.module.Item;
 import com.ch.recsysapp.module.ItemList;
 import com.ch.recsysapp.util.GetPostUtil;
@@ -63,6 +66,10 @@ public class MainActivity extends Activity {
 	public static final int LISTVIEW_REFRESH = 4;// 点击刷新按钮
 	private String response;// 服务器返回json数据
 	private ItemList itemList = new ItemList();// listView 显示用
+	
+	private ListAnimationAdapter listAdapter;//新的动画adapter
+	private ListAnimationAdapter2 listAdapter2;//新的动画adapter
+	private SpeedScrollListener listener;//给上面的listener
 
 	/*
 	 * handler,通信完成后刷新界面
@@ -207,6 +214,7 @@ public class MainActivity extends Activity {
 	 * 初始化主界面3个标签内容
 	 */
 	private void InitViewPager() {
+		listener = new SpeedScrollListener();
 		viewPager = (ViewPager) findViewById(R.id.vPager);
 		views = new ArrayList<View>();
 		LayoutInflater inflater = getLayoutInflater();
@@ -222,27 +230,24 @@ public class MainActivity extends Activity {
 				R.layout.activity_main_lay1_itemsyle, new String[] { "title",
 						"info", "img" }, new int[] { R.id.activity_main_title1,
 						R.id.activity_main_info1, R.id.activity_main_img1 });
+		lv1.setOnScrollListener(listener);
 		lv1.setAdapter(adapter);
 		/*
 		 * 初始化标签2
 		 */
 		ListView lv2 = (ListView) view2
 				.findViewById(R.id.activity_main_lay2_listview);
-		SimpleAdapter adapter2 = new SimpleAdapter(this, getData(),
-				R.layout.activity_main_lay2_itemsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title2,
-						R.id.activity_main_info2, R.id.activity_main_img2 });
-		lv2.setAdapter(adapter2);
+		
+		
+		listAdapter = new ListAnimationAdapter(getApplicationContext(), listener);
+		lv2.setAdapter(listAdapter);
 		/*
 		 * 初始化标签3
 		 */
 		ListView lv3 = (ListView) view3
 				.findViewById(R.id.activity_main_lay3_listview);
-		SimpleAdapter adapter3 = new SimpleAdapter(this, getData(),
-				R.layout.activity_main_lay3_itemsyle, new String[] { "title",
-						"info", "img" }, new int[] { R.id.activity_main_title3,
-						R.id.activity_main_info3, R.id.activity_main_img3 });
-		lv3.setAdapter(adapter3);
+		listAdapter2 = new ListAnimationAdapter2(getApplicationContext(), listener);
+		lv3.setAdapter(listAdapter2);
 
 		views.add(view1);
 		views.add(view2);
