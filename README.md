@@ -1,4 +1,4 @@
-Snake
+推荐系统
 =========
 
-It's a nice day。 いじょう。
+推荐系统Android APP
